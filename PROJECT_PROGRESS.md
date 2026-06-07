@@ -78,6 +78,9 @@
 
 ### 本次推送记录
 
-- 状态：待提交并推送。
-- 远程仓库：待创建。
-- GitHub Pages：待启用。
+- 状态：已完成第一次提交并推送。
+- 首次提交：`6fb606b feat: add polar travel journal static site`
+- 远程仓库：https://github.com/wzgig/polartrail-travel-journal
+- GitHub Pages：https://wzgig.github.io/polartrail-travel-journal/
+- Pages 发布源：`main` 分支 `/docs` 目录。
+- 说明：`single.html` 已同步到 `docs/index.html`，线上页面使用 `docs/index.html`。
