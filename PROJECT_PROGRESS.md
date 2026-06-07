@@ -84,3 +84,4 @@
 - GitHub Pages：https://wzgig.github.io/polartrail-travel-journal/
 - Pages 发布源：`main` 分支 `/docs` 目录。
 - 说明：`single.html` 已同步到 `docs/index.html`，线上页面使用 `docs/index.html`。
+- 线上验证：GitHub Pages 状态为 `built`，页面返回 HTTP 200，标题为“北境微光旅行手帐”。
