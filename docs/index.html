@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>北境微光旅行手帐</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Noto+Sans+SC:wght@400;500;700&display=swap");
+
+    :root {
+      --ink: #15323a;
+      --muted: #5b7174;
+      --paper: #f7f1e6;
+      --ice: #d9f1ef;
+      --sea: #2f8f8a;
+      --deep: #123a45;
+      --coral: #e96552;
+      --gold: #d7a84b;
+      --pine: #466b54;
+      --white: #fffaf0;
+      --shadow: 0 24px 60px rgba(21, 50, 58, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding-top: 78px;
+      color: var(--ink);
+      font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(217, 241, 239, 0.82) 0 18%, transparent 30%),
+        radial-gradient(circle at 88% 18%, rgba(233, 101, 82, 0.12) 0 12%, transparent 28%),
+        linear-gradient(135deg, #fffaf0 0%, #f7f1e6 48%, #e8f4f1 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.28;
+      background-image:
+        linear-gradient(rgba(21, 50, 58, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(21, 50, 58, 0.05) 1px, transparent 1px);
+      background-size: 34px 34px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      font-family: "Fraunces", "Noto Serif SC", serif;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 980px;
+      font-size: 4.1rem;
+    }
+
+    h2 {
+      font-size: 2.25rem;
+    }
+
+    h3 {
+      font-size: 1.35rem;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 20;
+      padding: 14px 24px;
+      border-bottom: 1px solid rgba(21, 50, 58, 0.12);
+      background: rgba(255, 250, 240, 0.84);
+      backdrop-filter: blur(18px);
+    }
+
+    .top-nav {
+      width: min(1160px, calc(100% - 24px));
+      min-height: 50px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-width: 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--deep);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      display: inline-block;
+      border-radius: 50%;
+      background:
+        linear-gradient(135deg, transparent 0 42%, rgba(255, 250, 240, 0.9) 43% 55%, transparent 56%),
+        radial-gradient(circle at 35% 35%, #d9f1ef 0 26%, #2f8f8a 27% 56%, #15323a 57% 100%);
+      box-shadow: 0 8px 22px rgba(47, 143, 138, 0.28);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .nav-links a {
+      min-height: 40px;
+      min-width: 0;
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 16px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-weight: 700;
+      transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+      background: var(--deep);
+      transform: translateY(-1px);
+    }
+
+    .nav-links a[href="#home"] {
+      color: var(--white);
+      background: var(--deep);
+    }
+
+    body:has(.single-page:target:not(#home)) .nav-links a[href="#home"] {
+      color: var(--muted);
+      background: transparent;
+    }
+
+    body:has(#content:target) .nav-links a[href="#content"],
+    body:has(#cold-routes:target) .nav-links a[href="#content"],
+    body:has(#photo-spots:target) .nav-links a[href="#content"],
+    body:has(#gear-library:target) .nav-links a[href="#content"],
+    body:has(#season-guide:target) .nav-links a[href="#content"],
+    body:has(#route-iceland:target) .nav-links a[href="#content"],
+    body:has(#route-lagoon:target) .nav-links a[href="#content"],
+    body:has(#route-lofoten:target) .nav-links a[href="#content"],
+    body:has(#route-lapland:target) .nav-links a[href="#content"],
+    body:has(#sources:target) .nav-links a[href="#content"],
+    body:has(#about:target) .nav-links a[href="#about"] {
+      color: var(--white);
+      background: var(--deep);
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    .single-page {
+      display: none;
+      scroll-margin-top: 96px;
+    }
+
+    #home {
+      display: block;
+    }
+
+    .single-page:target {
+      display: block;
+    }
+
+    body:has(.single-page:target:not(#home)) #home {
+      display: none;
+    }
+
+    .hero,
+    .page-hero,
+    .section,
+    .split-section,
+    .stats-band,
+    .planner-strip,
+    .contact-section {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: calc(100vh - 78px);
+      display: grid;
+      grid-template-columns: 1.04fr 0.96fr;
+      align-items: center;
+      gap: 48px;
+      padding: 72px 0 48px;
+    }
+
+    .hero-copy,
+    .split-copy {
+      display: grid;
+      gap: 22px;
+      min-width: 0;
+    }
+
+    .eyebrow {
+      color: var(--coral);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .lead {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.12rem;
+      overflow-wrap: anywhere;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 20px;
+      border: 1px solid rgba(21, 50, 58, 0.16);
+      border-radius: 999px;
+      font-weight: 700;
+      box-shadow: 0 12px 28px rgba(21, 50, 58, 0.08);
+    }
+
+    .button.primary {
+      color: var(--white);
+      background: var(--deep);
+    }
+
+    .button.ghost {
+      color: var(--deep);
+      background: rgba(255, 250, 240, 0.75);
+    }
+
+    .hero-visual {
+      position: relative;
+      min-width: 0;
+      min-height: 560px;
+      border: 1px solid rgba(21, 50, 58, 0.12);
+      border-radius: 8px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(18, 58, 69, 0.28) 0%, transparent 38%),
+        linear-gradient(160deg, #173844 0%, #2f8f8a 48%, #f7f1e6 100%);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255, 250, 240, 0.12) 1px, transparent 1px),
+        linear-gradient(rgba(255, 250, 240, 0.11) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mix-blend-mode: soft-light;
+    }
+
+    .aurora-band {
+      position: absolute;
+      left: -20%;
+      width: 135%;
+      height: 88px;
+      border-radius: 50%;
+      filter: blur(4px);
+      opacity: 0.86;
+      transform: rotate(-12deg);
+    }
+
+    .band-one {
+      top: 92px;
+      background: linear-gradient(90deg, transparent, rgba(217, 241, 239, 0.85), rgba(215, 168, 75, 0.48), transparent);
+    }
+
+    .band-two {
+      top: 150px;
+      background: linear-gradient(90deg, transparent, rgba(233, 101, 82, 0.52), rgba(217, 241, 239, 0.74), transparent);
+      transform: rotate(-7deg);
+    }
+
+    .sun-disc {
+      position: absolute;
+      right: 54px;
+      top: 66px;
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      background: #f2c66a;
+      box-shadow: 0 0 70px rgba(242, 198, 106, 0.72);
+    }
+
+    .mountain {
+      position: absolute;
+      bottom: 84px;
+      width: 112%;
+      height: 250px;
+      clip-path: polygon(0 72%, 14% 42%, 26% 64%, 42% 22%, 55% 52%, 68% 18%, 83% 58%, 100% 33%, 100% 100%, 0 100%);
+    }
+
+    .mountain-back {
+      left: -4%;
+      background: rgba(18, 58, 69, 0.58);
+    }
+
+    .mountain-front {
+      left: -6%;
+      bottom: 56px;
+      height: 220px;
+      background: linear-gradient(180deg, #fffaf0 0%, #d9f1ef 46%, #8eb8b3 100%);
+      clip-path: polygon(0 70%, 13% 36%, 22% 58%, 38% 20%, 48% 58%, 62% 28%, 76% 62%, 91% 26%, 100% 50%, 100% 100%, 0 100%);
+    }
+
+    .ice-lake {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 160px;
+      background:
+        linear-gradient(165deg, rgba(255, 250, 240, 0.52) 0 14%, transparent 15% 100%),
+        linear-gradient(25deg, rgba(255, 250, 240, 0.45) 0 18%, transparent 19% 100%),
+        linear-gradient(180deg, #b6dfdc, #2f8f8a);
+    }
+
+    .floating-card {
+      position: absolute;
+      left: 26px;
+      bottom: 26px;
+      z-index: 2;
+      width: min(280px, calc(100% - 52px));
+      display: grid;
+      gap: 4px;
+      padding: 18px;
+      border: 1px solid rgba(255, 250, 240, 0.56);
+      border-radius: 8px;
+      color: var(--white);
+      background: rgba(18, 58, 69, 0.72);
+      backdrop-filter: blur(14px);
+    }
+
+    .floating-card span,
+    .floating-card small {
+      color: rgba(255, 250, 240, 0.82);
+    }
+
+    .floating-card strong {
+      font-size: 1.3rem;
+    }
+
+    .stats-band {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      margin-bottom: 92px;
+      overflow: hidden;
+      border: 1px solid rgba(21, 50, 58, 0.12);
+      border-radius: 8px;
+      background: rgba(21, 50, 58, 0.12);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-item {
+      display: grid;
+      gap: 2px;
+      padding: 22px;
+      background: rgba(255, 250, 240, 0.72);
+    }
+
+    .stat-item strong {
+      color: var(--coral);
+      font-family: "Fraunces", serif;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .stat-item span {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    a.stat-item {
+      color: inherit;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    a.stat-item:hover {
+      background: rgba(255, 250, 240, 0.92);
+      transform: translateY(-2px);
+    }
+
+    .card-link,
+    .back-link,
+    .source-link {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--deep);
+      font-weight: 700;
+    }
+
+    .card-link::after,
+    .back-link::before,
+    .source-link::after {
+      color: var(--coral);
+      font-weight: 700;
+    }
+
+    .card-link::after,
+    .source-link::after {
+      content: "→";
+    }
+
+    .back-link::before {
+      content: "←";
+    }
+
+    .back-row {
+      width: min(1160px, calc(100% - 40px));
+      margin: 28px auto 0;
+    }
+
+    .detail-grid,
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .detail-panel,
+    .route-mini-card,
+    .source-card {
+      border: 1px solid rgba(21, 50, 58, 0.12);
+      border-radius: 8px;
+      background: rgba(255, 250, 240, 0.76);
+      box-shadow: 0 16px 38px rgba(21, 50, 58, 0.08);
+    }
+
+    .detail-panel {
+      display: grid;
+      align-content: start;
+      gap: 12px;
+      min-height: 230px;
+      padding: 26px;
+    }
+
+    .route-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .route-mini-card {
+      display: grid;
+      gap: 10px;
+      padding: 22px;
+    }
+
+    .route-mini-card strong,
+    .detail-panel strong {
+      font-family: "Fraunces", "Noto Serif SC", serif;
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+
+    .route-mini-card p,
+    .detail-panel p,
+    .source-card p {
+      color: var(--muted);
+    }
+
+    .detail-kicker {
+      color: var(--coral);
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .source-card {
+      display: grid;
+      gap: 12px;
+      padding: 24px;
+    }
+
+    .section {
+      padding: 82px 0;
+    }
+
+    .compact-section {
+      padding-top: 40px;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin: 0 auto 34px;
+      display: grid;
+      gap: 12px;
+      text-align: center;
+    }
+
+    .section-heading p:not(.eyebrow) {
+      color: var(--muted);
+    }
+
+    .align-left {
+      margin-left: 0;
+      text-align: left;
+    }
+
+    .feature-grid,
+    .team-grid,
+    .note-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card,
+    .team-card,
+    .note-card,
+    .route-card-large,
+    .contact-card {
+      border: 1px solid rgba(21, 50, 58, 0.12);
+      border-radius: 8px;
+      background: rgba(255, 250, 240, 0.74);
+      box-shadow: 0 16px 38px rgba(21, 50, 58, 0.08);
+    }
+
+    .feature-card {
+      min-height: 248px;
+      display: grid;
+      align-content: start;
+      gap: 16px;
+      padding: 28px;
+    }
+
+    .feature-card p,
+    .team-card p,
+    .note-card p,
+    .route-card-large p,
+    .contact-section p {
+      color: var(--muted);
+    }
+
+    .card-icon {
+      width: 62px;
+      height: 62px;
+      border-radius: 22px 22px 8px 22px;
+    }
+
+    .card-icon.frost {
+      background:
+        linear-gradient(135deg, transparent 0 44%, rgba(255, 250, 240, 0.9) 45% 55%, transparent 56%),
+        linear-gradient(135deg, #d9f1ef, #2f8f8a);
+    }
+
+    .card-icon.coral {
+      background:
+        radial-gradient(circle at 70% 30%, #fffaf0 0 16%, transparent 17%),
+        linear-gradient(135deg, #e96552, #123a45);
+    }
+
+    .card-icon.gold {
+      background:
+        linear-gradient(45deg, transparent 0 35%, rgba(255, 250, 240, 0.8) 36% 45%, transparent 46%),
+        linear-gradient(135deg, #d7a84b, #466b54);
+    }
+
+    .split-section {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: center;
+      gap: 38px;
+      padding: 82px 0;
+    }
+
+    .split-art {
+      min-height: 410px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(21, 50, 58, 0.12);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .polar-window {
+      background:
+        radial-gradient(circle at 50% 18%, rgba(215, 168, 75, 0.74) 0 9%, transparent 10%),
+        linear-gradient(180deg, #123a45 0 46%, #2f8f8a 47% 68%, #d9f1ef 69% 100%);
+    }
+
+    .polar-window::before {
+      content: "";
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      bottom: 58px;
+      height: 128px;
+      background: #fffaf0;
+      clip-path: polygon(0 74%, 12% 42%, 24% 65%, 38% 25%, 49% 62%, 62% 34%, 76% 66%, 90% 30%, 100% 58%, 100% 100%, 0 100%);
+    }
+
+    .window-glow {
+      position: absolute;
+      left: -8%;
+      top: 78px;
+      width: 120%;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, transparent, rgba(217, 241, 239, 0.75), rgba(233, 101, 82, 0.42), transparent);
+      transform: rotate(-9deg);
+    }
+
+    .check-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .check-list li {
+      position: relative;
+      padding-left: 24px;
+      color: var(--muted);
+    }
+
+    .check-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--coral);
+    }
+
+    .page-hero {
+      min-height: 340px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 36px;
+      padding: 74px 0 52px;
+    }
+
+    .page-hero h1 {
+      margin-bottom: 20px;
+      font-size: 3.45rem;
+    }
+
+    .page-hero-badge,
+    .about-stamp {
+      width: 178px;
+      min-height: 178px;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 6px;
+      padding: 20px;
+      border: 1px solid rgba(21, 50, 58, 0.12);
+      border-radius: 50%;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255, 250, 240, 0.92), rgba(217, 241, 239, 0.88));
+      box-shadow: var(--shadow);
+    }
+
+    .page-hero-badge strong,
+    .about-stamp strong {
+      color: var(--coral);
+      font-family: "Fraunces", serif;
+      font-size: 3rem;
+      line-height: 1;
+    }
+
+    .page-hero-badge span,
+    .about-stamp span,
+    .about-stamp small {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .route-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .route-card-large {
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 0.86fr 1.14fr;
+      min-height: 280px;
+    }
+
+    .route-image {
+      min-height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .route-image::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 250, 240, 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 250, 240, 0.18) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    .route-image::after {
+      content: "";
+      position: absolute;
+      left: -8%;
+      right: -8%;
+      bottom: 0;
+      height: 48%;
+      background: rgba(255, 250, 240, 0.86);
+      clip-path: polygon(0 72%, 14% 38%, 30% 62%, 43% 20%, 57% 66%, 72% 26%, 88% 60%, 100% 32%, 100% 100%, 0 100%);
+    }
+
+    .route-image.glacier {
+      background: linear-gradient(160deg, #123a45, #2f8f8a 54%, #d9f1ef);
+    }
+
+    .route-image.lagoon {
+      background: radial-gradient(circle at 65% 28%, #f2c66a 0 14%, transparent 15%), linear-gradient(150deg, #e96552, #d9f1ef 48%, #2f8f8a);
+    }
+
+    .route-image.fjord {
+      background: linear-gradient(145deg, #466b54, #d7a84b 54%, #f7f1e6);
+    }
+
+    .route-image.cabin {
+      background: radial-gradient(circle at 44% 18%, #d9f1ef 0 10%, transparent 11%), linear-gradient(160deg, #15323a, #466b54 62%, #d7a84b);
+    }
+
+    .route-body {
+      min-width: 0;
+      display: grid;
+      align-content: center;
+      gap: 14px;
+      padding: 28px;
+    }
+
+    .tag {
+      width: fit-content;
+      padding: 5px 10px;
+      border-radius: 999px;
+      color: var(--deep);
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: var(--ice);
+    }
+
+    .tag.warm {
+      color: #743126;
+      background: #f8c9bd;
+    }
+
+    .tag.forest {
+      color: #263f2e;
+      background: #cfe0c9;
+    }
+
+    .tag.night {
+      color: var(--white);
+      background: var(--deep);
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .meta-row span {
+      padding: 6px 10px;
+      border: 1px solid rgba(21, 50, 58, 0.12);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .notes-section {
+      padding-top: 58px;
+    }
+
+    .note-card {
+      position: relative;
+      min-height: 220px;
+      display: grid;
+      align-content: end;
+      gap: 10px;
+      padding: 26px;
+      overflow: hidden;
+    }
+
+    .note-number {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      color: rgba(21, 50, 58, 0.12);
+      font-family: "Fraunces", serif;
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .planner-strip,
+    .contact-section {
+      display: grid;
+      grid-template-columns: 0.72fr 1.28fr;
+      gap: 28px;
+      align-items: center;
+      margin-bottom: 82px;
+      padding: 34px;
+      border: 1px solid rgba(21, 50, 58, 0.12);
+      border-radius: 8px;
+      color: var(--white);
+      background: linear-gradient(135deg, rgba(18, 58, 69, 0.94), rgba(47, 143, 138, 0.88));
+      box-shadow: var(--shadow);
+    }
+
+    .planner-strip .eyebrow,
+    .contact-section .eyebrow {
+      color: #f2c66a;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill-list span {
+      padding: 9px 13px;
+      border: 1px solid rgba(255, 250, 240, 0.32);
+      border-radius: 999px;
+      background: rgba(255, 250, 240, 0.12);
+      font-weight: 700;
+    }
+
+    .about-hero {
+      align-items: center;
+    }
+
+    .story-section {
+      padding-top: 36px;
+    }
+
+    .map-board {
+      background:
+        linear-gradient(90deg, rgba(21, 50, 58, 0.1) 1px, transparent 1px),
+        linear-gradient(rgba(21, 50, 58, 0.1) 1px, transparent 1px),
+        linear-gradient(135deg, #fffaf0, #d9f1ef 64%, #f4d7c6);
+      background-size: 42px 42px, 42px 42px, auto;
+    }
+
+    .map-line {
+      position: absolute;
+      left: 16%;
+      top: 52%;
+      width: 70%;
+      height: 90px;
+      border-top: 4px dashed rgba(18, 58, 69, 0.54);
+      border-radius: 50%;
+      transform: rotate(-12deg);
+    }
+
+    .map-pin {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      border: 6px solid var(--white);
+      border-radius: 50% 50% 50% 0;
+      background: var(--coral);
+      box-shadow: 0 10px 24px rgba(21, 50, 58, 0.2);
+      transform: rotate(-45deg);
+    }
+
+    .pin-one {
+      left: 18%;
+      top: 42%;
+    }
+
+    .pin-two {
+      left: 50%;
+      top: 30%;
+      background: var(--sea);
+    }
+
+    .pin-three {
+      right: 18%;
+      bottom: 30%;
+      background: var(--gold);
+    }
+
+    .team-card {
+      min-height: 294px;
+      display: grid;
+      align-content: start;
+      gap: 10px;
+      padding: 26px;
+    }
+
+    .avatar {
+      width: 86px;
+      height: 86px;
+      margin-bottom: 8px;
+      border: 5px solid rgba(255, 250, 240, 0.86);
+      border-radius: 50%;
+      box-shadow: 0 12px 24px rgba(21, 50, 58, 0.16);
+    }
+
+    .avatar-one {
+      background: linear-gradient(135deg, #d9f1ef 0 45%, #2f8f8a 46% 100%);
+    }
+
+    .avatar-two {
+      background: radial-gradient(circle at 60% 30%, #f2c66a 0 17%, transparent 18%), linear-gradient(135deg, #e96552, #f7f1e6);
+    }
+
+    .avatar-three {
+      background: linear-gradient(135deg, #466b54 0 44%, #d7a84b 45% 100%);
+    }
+
+    .role {
+      color: var(--coral);
+      font-weight: 700;
+    }
+
+    .contact-section {
+      grid-template-columns: 1fr 0.9fr;
+    }
+
+    .contact-section p {
+      color: rgba(255, 250, 240, 0.84);
+    }
+
+    .contact-card {
+      display: grid;
+      gap: 10px;
+      padding: 24px;
+      color: var(--deep);
+      background: rgba(255, 250, 240, 0.94);
+      box-shadow: none;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+    }
+
+    .site-footer {
+      padding: 28px 20px 38px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 920px) {
+      body {
+        padding-top: 120px;
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      .site-header {
+        padding: 12px 14px;
+      }
+
+      .top-nav {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .brand {
+        justify-content: center;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .nav-links a {
+        padding: 8px 12px;
+        font-size: 0.92rem;
+      }
+
+      .hero,
+      .page-hero,
+      .split-section,
+      .planner-strip,
+      .contact-section {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 48px;
+      }
+
+      .hero-visual {
+        min-height: 440px;
+      }
+
+      .stats-band,
+      .route-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .feature-grid,
+      .team-grid,
+      .note-grid,
+      .detail-grid,
+      .source-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .route-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .page-hero {
+        align-items: start;
+      }
+
+      .page-hero h1 {
+        font-size: 2.75rem;
+      }
+
+      .page-hero-badge,
+      .about-stamp {
+        width: 150px;
+        min-height: 150px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding-top: 132px;
+      }
+
+      h1 {
+        font-size: 2.35rem;
+      }
+
+      h2 {
+        font-size: 1.72rem;
+      }
+
+      .hero,
+      .page-hero,
+      .section,
+      .split-section,
+      .stats-band,
+      .planner-strip,
+      .contact-section {
+        width: min(100% - 28px, 1160px);
+      }
+
+      .nav-links {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+      }
+
+      .nav-links a {
+        justify-content: center;
+        min-height: 38px;
+        padding: 7px 6px;
+        font-size: 0.86rem;
+      }
+
+      .hero {
+        gap: 30px;
+        padding-bottom: 34px;
+      }
+
+      .lead {
+        font-size: 1rem;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .hero-visual {
+        min-height: 380px;
+      }
+
+      .stats-band,
+      .route-grid,
+      .route-list {
+        grid-template-columns: 1fr;
+      }
+
+      .route-card-large {
+        grid-template-columns: 1fr;
+      }
+
+      .route-image {
+        min-height: 220px;
+      }
+
+      .split-art {
+        min-height: 320px;
+      }
+
+      .section {
+        padding: 56px 0;
+      }
+
+      .page-hero {
+        min-height: auto;
+        padding-top: 48px;
+      }
+
+      .page-hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .planner-strip,
+      .contact-section {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="top-nav" aria-label="主导航">
+      <a class="brand" href="#home">
+        <span class="brand-mark"></span>
+        <span>北境微光</span>
+      </a>
+      <div class="nav-links">
+        <a href="#home">首页</a>
+        <a href="#content">路线内容</a>
+        <a href="#about">关于我们</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="single-page">
+      <div class="hero home-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">PolarTrail Travel Journal</p>
+          <h1>把极光、冰川和海岸线，整理成一份可出发的旅行手帐。</h1>
+          <p class="lead">
+            北境微光专注于冷色系目的地旅行灵感：冰岛环岛、挪威峡湾、芬兰森林小屋与阿拉斯加极光营地。
+            我们把路线、预算、装备和拍照时间整理成清晰的行前计划，让一次远方旅行更从容。
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#content">查看精选路线</a>
+            <a class="button ghost" href="#about">了解团队</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="极光与冰川的装饰画面">
+          <div class="aurora-band band-one"></div>
+          <div class="aurora-band band-two"></div>
+          <div class="sun-disc"></div>
+          <div class="mountain mountain-back"></div>
+          <div class="mountain mountain-front"></div>
+          <div class="ice-lake"></div>
+          <div class="route-card floating-card">
+            <span>本月推荐</span>
+            <strong>冰岛南岸 6 日</strong>
+            <small>瀑布、黑沙滩、冰河湖、极光摄影</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-band">
+        <a class="stat-item" href="#cold-routes">
+          <strong>18</strong>
+          <span>条冷门路线</span>
+        </a>
+        <a class="stat-item" href="#photo-spots">
+          <strong>42</strong>
+          <span>个拍摄点位</span>
+        </a>
+        <a class="stat-item" href="#gear-library">
+          <strong>7</strong>
+          <span>份装备清单</span>
+        </a>
+        <a class="stat-item" href="#season-guide">
+          <strong>4</strong>
+          <span>季节出行建议</span>
+        </a>
+      </div>
+
+      <div class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Why We Curate</p>
+          <h2>不是走马观花，而是把每一天安排得有光。</h2>
+          <p>
+            我们关注真实可执行的旅行细节：什么时候赶路、哪里停留、如何避开拥挤时段，以及哪一段风景最适合慢下来。
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="card-icon frost"></div>
+            <h3>路线有节奏</h3>
+            <p>每天的车程、停靠点和休息时间都被分成清晰段落，适合第一次前往北境的旅行者参考。</p>
+          </article>
+          <article class="feature-card">
+            <div class="card-icon coral"></div>
+            <h3>信息够具体</h3>
+            <p>每条路线都包含季节提醒、服装建议、摄影时间、餐食补给和预算范围，减少临时查资料的压力。</p>
+          </article>
+          <article class="feature-card">
+            <div class="card-icon gold"></div>
+            <h3>画面感更强</h3>
+            <p>页面用图文卡片、色彩标签和场景描述呈现，让你在出发前就能想象当天的风景和氛围。</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="split-section">
+        <div class="split-art polar-window">
+          <span class="window-glow"></span>
+        </div>
+        <div class="split-copy">
+          <p class="eyebrow">Featured Experience</p>
+          <h2>极光夜巡：从港口小镇驶向无光山谷。</h2>
+          <p>
+            天黑后离开主路，沿着结冰河谷慢慢寻找云层缝隙。我们建议带上热饮、防水三脚架和备用手套，
+            在 21:00 到 01:00 之间安排 2 到 3 个观测点，给天空足够的等待时间。
+          </p>
+          <ul class="check-list">
+            <li>适合季节：10 月至次年 3 月</li>
+            <li>推荐装备：羽绒外套、防滑鞋套、暖宝宝</li>
+            <li>拍摄建议：ISO 1600 起步，快门 4 到 8 秒</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="content" class="single-page">
+      <div class="page-hero routes-hero">
+        <div>
+          <p class="eyebrow">Route Library</p>
+          <h1>精选路线与主题清单</h1>
+          <p class="lead">
+            这里收集四种适合入门的北境玩法：冰川、温泉、峡湾和森林小屋。每张卡片都给出适合人群、亮点和行前提醒。
+          </p>
+        </div>
+        <div class="page-hero-badge">
+          <strong>4</strong>
+          <span>条本季推荐</span>
+        </div>
+      </div>
+
+      <div class="section compact-section">
+        <div class="route-grid">
+          <article class="route-card-large">
+            <div class="route-image glacier"></div>
+            <div class="route-body">
+              <span class="tag">冰川徒步</span>
+              <h2>瓦特纳冰原与蓝冰洞 5 日</h2>
+              <p>适合想近距离体验冰川纹理的旅行者，路线包含黑沙滩、冰河湖、蓝冰洞与海边小镇住宿。</p>
+              <div class="meta-row">
+                <span>难度：中等</span>
+                <span>季节：冬春</span>
+              </div>
+              <a class="card-link" href="#route-iceland">查看路线细节</a>
+            </div>
+          </article>
+
+          <article class="route-card-large">
+            <div class="route-image lagoon"></div>
+            <div class="route-body">
+              <span class="tag warm">温泉慢旅</span>
+              <h2>火山温泉与海岸公路 4 日</h2>
+              <p>把赶路时间压缩，把更多时间留给温泉、咖啡馆和海边散步，适合第一次尝试自驾的人。</p>
+              <div class="meta-row">
+                <span>难度：轻松</span>
+                <span>季节：全年</span>
+              </div>
+              <a class="card-link" href="#route-lagoon">查看路线细节</a>
+            </div>
+          </article>
+
+          <article class="route-card-large">
+            <div class="route-image fjord"></div>
+            <div class="route-body">
+              <span class="tag forest">峡湾公路</span>
+              <h2>挪威西岸峡湾与观景列车 7 日</h2>
+              <p>从港口城市出发，搭配渡轮、山路和观景列车，适合喜欢层次丰富风景的人。</p>
+              <div class="meta-row">
+                <span>难度：中等</span>
+                <span>季节：夏秋</span>
+              </div>
+              <a class="card-link" href="#route-lofoten">查看路线细节</a>
+            </div>
+          </article>
+
+          <article class="route-card-large">
+            <div class="route-image cabin"></div>
+            <div class="route-body">
+              <span class="tag night">森林小屋</span>
+              <h2>芬兰拉普兰木屋与极光 6 日</h2>
+              <p>住进松林边的小屋，白天体验雪鞋徒步和集市，夜晚在无光区域等待极光。</p>
+              <div class="meta-row">
+                <span>难度：轻松</span>
+                <span>季节：冬季</span>
+              </div>
+              <a class="card-link" href="#route-lapland">查看路线细节</a>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="section notes-section">
+        <div class="section-heading align-left">
+          <p class="eyebrow">Planning Notes</p>
+          <h2>出发前需要确认的三件事</h2>
+        </div>
+        <div class="note-grid">
+          <article class="note-card">
+            <span class="note-number">01</span>
+            <h3>天气窗口</h3>
+            <p>北境天气变化快，建议每天预留一段可调整时间，把户外项目放在天气较稳定的上午或中午。</p>
+          </article>
+          <article class="note-card">
+            <span class="note-number">02</span>
+            <h3>道路状态</h3>
+            <p>自驾前确认封路、风速和路面结冰情况，冬季不要把山路赶车安排得太晚。</p>
+          </article>
+          <article class="note-card">
+            <span class="note-number">03</span>
+            <h3>装备冗余</h3>
+            <p>相机电池、手套、袜子和保温杯都建议准备备用件，低温环境会放大每个小失误。</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="planner-strip">
+        <div>
+          <p class="eyebrow">Mini Checklist</p>
+          <h2>快速装备清单</h2>
+        </div>
+        <div class="pill-list" aria-label="装备清单">
+          <span>防水外套</span>
+          <span>羊毛内层</span>
+          <span>防滑鞋套</span>
+          <span>热饮杯</span>
+          <span>备用电池</span>
+          <span>离线地图</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="single-page">
+      <div class="page-hero about-hero">
+        <div>
+          <p class="eyebrow">About PolarTrail</p>
+          <h1>我们把旅行经验写成清晰、漂亮、能直接参考的手帐。</h1>
+          <p class="lead">
+            北境微光由三位热爱寒冷目的地的旅行者共同整理。我们不追求打卡数量，而是关注路线是否舒服、信息是否准确、画面是否值得停留。
+          </p>
+        </div>
+        <div class="about-stamp">
+          <span>Founded</span>
+          <strong>2026</strong>
+          <small>Made for slow northern trips</small>
+        </div>
+      </div>
+
+      <div class="split-section story-section">
+        <div class="split-copy">
+          <p class="eyebrow">Our Story</p>
+          <h2>从一份混乱表格，变成一个有温度的网站。</h2>
+          <p>
+            最开始，我们只是把旅行中踩过的坑写进共享表格：哪条路冬季容易封、哪家咖啡馆能躲风、
+            哪个湖边晚上真的足够暗。后来这些记录越积越多，我们决定把它们整理成更适合阅读的旅行档案。
+          </p>
+          <p>
+            这个小站希望给你一种出发前的安全感：打开页面就能看到路线重点、时间安排、装备提醒和可以期待的风景。
+          </p>
+        </div>
+        <div class="split-art map-board">
+          <div class="map-line"></div>
+          <span class="map-pin pin-one"></span>
+          <span class="map-pin pin-two"></span>
+          <span class="map-pin pin-three"></span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Team</p>
+          <h2>小而专注的编辑团队</h2>
+        </div>
+
+        <div class="team-grid">
+          <article class="team-card">
+            <div class="avatar avatar-one"></div>
+            <h3>林澈</h3>
+            <p class="role">路线编辑</p>
+            <p>负责整理每日动线、交通时间和住宿区域，让路线既有风景也有休息。</p>
+          </article>
+          <article class="team-card">
+            <div class="avatar avatar-two"></div>
+            <h3>许南</h3>
+            <p class="role">视觉记录</p>
+            <p>关注拍摄时段、构图点位和天气光线，把旅行画面转化成更直观的页面内容。</p>
+          </article>
+          <article class="team-card">
+            <div class="avatar avatar-three"></div>
+            <h3>周予</h3>
+            <p class="role">装备顾问</p>
+            <p>负责装备清单、预算提醒和寒冷环境安全建议，帮助读者减少准备盲区。</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="contact-section">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>想补充路线或合作整理旅行资料？</h2>
+          <p>
+            欢迎把你的北境旅行经验、照片点位或装备建议发给我们。我们会把实用信息整理成更清楚的页面内容。
+          </p>
+        </div>
+        <div class="contact-card">
+          <p><strong>邮箱：</strong>hello@polartrail.example</p>
+          <p><strong>城市：</strong>上海 · 远程协作</p>
+          <p><strong>更新频率：</strong>每月整理 1 到 2 条路线</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="cold-routes" class="single-page">
+      <div class="back-row">
+        <a class="back-link" href="#home">返回首页</a>
+      </div>
+      <div class="page-hero">
+        <div>
+          <p class="eyebrow">18 Quiet Routes</p>
+          <h1>18 条可以继续展开的北境路线</h1>
+          <p class="lead">
+            这些路线以官方旅游资料为素材整理，覆盖冰岛、挪威、芬兰、瑞典、法罗群岛、格陵兰、斯瓦尔巴和阿拉斯加。
+            每条都给出适合季节、画面重点和旅行节奏。
+          </p>
+        </div>
+        <div class="page-hero-badge">
+          <strong>18</strong>
+          <span>Route Notes</span>
+        </div>
+      </div>
+
+      <div class="section compact-section">
+        <div class="route-list">
+          <article class="route-mini-card">
+            <span class="detail-kicker">Iceland</span>
+            <strong>南岸瀑布、黑沙滩与冰河湖</strong>
+            <p>从雷克雅未克向东，串联 Seljalandsfoss、Skógafoss、Reynisfjara、Skaftafell 与 Jökulsárlón。</p>
+            <a class="card-link" href="#route-iceland">看 5 日安排</a>
+          </article>
+          <article class="route-mini-card">
+            <span class="detail-kicker">Iceland</span>
+            <strong>雷克雅内斯火山与温泉线</strong>
+            <p>适合短停：熔岩地貌、海岸灯塔、地热蒸汽和温泉体验集中，路程紧凑。</p>
+            <a class="card-link" href="#route-lagoon">看 4 日安排</a>
+          </article>
+          <article class="route-mini-card">
+            <span class="detail-kicker">Iceland</span>
+            <strong>西峡湾慢速海岸</strong>
+            <p>人少、路长、停留感强，适合把 Patreksfjörður、Dynjandi 和小港镇安排成 5 到 7 日。</p>
+          </article>
+          <article class="route-mini-card">
+            <span class="detail-kicker">Iceland</span>
+            <strong>北部米湖与钻石圈</strong>
+            <p>以 Akureyri 为补给点，连接 Mývatn、Dettifoss、Húsavík 和火山地热景观。</p>
+          </article>
+          <article class="route-mini-card">
+            <span class="detail-kicker">Norway</span>
+            <strong>Lofoten E10 渔村与白沙滩</strong>
+            <p>官方景观路线从 Å 到 Raftsundet，冬季适合极光，夏季适合海岸徒步。</p>
+            <a class="card-link" href="#route-lofoten">看 7 日安排</a>
+          </article>
+          <article class="route-mini-card">
+            <span class="detail-kicker">Norway</span>
+            <strong>Senja 西岸海崖公路</strong>
+            <p>适合替代热门峡湾路线，节奏是海湾、山口、观景平台与小镇住宿。</p>
+          </article>
+          <article class="route-mini-card">
+            <span class="detail-kicker">Norway</span>
+            <strong>Tromsø 与 Lyngen Alps</strong>
+            <p>白天峡湾和雪山，夜晚极光追踪，适合不想频繁换住宿的旅行者。</p>
+          </article>
+          <article class="route-mini-card">
+            <span class="detail-kicker">Norway</span>
+            <strong>Bergen、Flåm 与 Aurlandsfjord</strong>
+            <p>把城市、铁路、渡轮和峡湾观景点放在同一条轻量线路里。</p>
+          </article>
+          <article class="route-mini-card">
+            <span class="detail-kicker">Finland</span>
+            <strong>Rovaniemi 北极圈与森林木屋</strong>
+            <p>适合第一次去拉普兰：机场方便、活动密集、雪地体验完整。</p>
+            <a class="card-link" href="#route-lapland">看 6 日安排</a>
+          </article>
+          <article class="route-mini-card">
+            <span class="detail-kicker">Finland</span>
+            <strong>Inari 湖与萨米文化</strong>
+            <p>更安静的北部路线，适合把博物馆、湖面活动和极光住宿结合。</p>
+          </article>
+          <article class="route-mini-card">
+            <span class="detail-kicker">Finland</span>
+            <strong>Levi、Ylläs 与雪原步道</strong>
+            <p>适合家庭或轻户外，滑雪、雪鞋、咖啡馆和木屋都容易安排。</p>
+          </article>
+          <article class="route-mini-card">
+            <span class="detail-kicker">Sweden</span>
+            <strong>Kiruna 与 Abisko 极光走廊</strong>
+            <p>以铁路或自驾连接北极小城、国家公园和极光观测点。</p>
+          </article>
+          <article class="route-mini-card">
+            <span class="detail-kicker">Sweden</span>
+            <strong>Jukkasjärvi 冰旅馆与 Torne River</strong>
+            <p>适合短线冬季旅行，把冰雕空间、河谷散步和极光夜晚结合。</p>
+          </article>
+          <article class="route-mini-card">
+            <span class="detail-kicker">Svalbard</span>
+            <strong>Longyearbyen 极夜基地</strong>
+            <p>冬季重心是极夜、狗拉雪橇、雪地车和严格向导制度下的荒野活动。</p>
+          </article>
+          <article class="route-mini-card">
+            <span class="detail-kicker">Faroe Islands</span>
+            <strong>Saksun、Gjógv 与 Tjørnuvík</strong>
+            <p>小岛距离短但天气强烈，适合用 4 到 5 日看峡湾村落、草屋顶和海崖。</p>
+          </article>
+          <article class="route-mini-card">
+            <span class="detail-kicker">Greenland</span>
+            <strong>Ilulissat 冰峡湾与 Disko Bay</strong>
+            <p>围绕冰山、木屋小镇和海湾船行安排，适合把节奏放慢。</p>
+          </article>
+          <article class="route-mini-card">
+            <span class="detail-kicker">Alaska</span>
+            <strong>Fairbanks 与 Chena Hot Springs</strong>
+            <p>冬季以极光、温泉和冰雕为主，适合 4 到 6 日固定基地玩法。</p>
+          </article>
+          <article class="route-mini-card">
+            <span class="detail-kicker">Alaska</span>
+            <strong>Denali 冬季公园线</strong>
+            <p>以 Parks Highway 和 Denali 周边为骨架，天气允许时安排雪地步道和山景停靠。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="photo-spots" class="single-page">
+      <div class="back-row">
+        <a class="back-link" href="#home">返回首页</a>
+      </div>
+      <div class="page-hero">
+        <div>
+          <p class="eyebrow">42 Photo Stops</p>
+          <h1>42 个拍摄点位，被整理成 6 类场景</h1>
+          <p class="lead">
+            不是把点位堆成清单，而是按旅行当天的光线和天气来整理：瀑布、冰川、海岸、峡湾、村落、夜空。
+          </p>
+        </div>
+        <div class="page-hero-badge">
+          <strong>42</strong>
+          <span>Frames</span>
+        </div>
+      </div>
+
+      <div class="section compact-section">
+        <div class="detail-grid">
+          <article class="detail-panel">
+            <span class="detail-kicker">Waterfalls</span>
+            <strong>瀑布与水雾</strong>
+            <p>Seljalandsfoss、Skógafoss、Dynjandi、Gullfoss、Godafoss、Kvernufoss、Öxarárfoss。重点是防水、逆光和低角度。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Ice</span>
+            <strong>冰川与冰湖</strong>
+            <p>Jökulsárlón、Fjallsárlón、Skaftafell、Vatnajökull、Ilulissat Icefjord、Disko Bay、蓝冰洞。重点是安全距离和偏振镜。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Coast</span>
+            <strong>黑沙滩与海岸线</strong>
+            <p>Reynisfjara、Dyrhólaey、Haukland、Utakleiv、Ramberg、Tjørnuvík、Saksun。重点是潮汐、风速和海浪退线。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Fjord</span>
+            <strong>峡湾与公路弯道</strong>
+            <p>Aurlandsfjord、Lyngen、Senja、Reinehalsen、Austnesfjorden、Vestfjord、E10 桥段。重点是压缩透视和车窗反光。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Village</span>
+            <strong>渔村、木屋与灯塔</strong>
+            <p>Reine、Henningsvær、Nusfjord、Longyearbyen、Ilulissat、Rovaniemi 木屋区、冰岛南岸灯塔。重点是蓝调时刻。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Night Sky</span>
+            <strong>极光与星空</strong>
+            <p>Abisko、Inari、Fairbanks、Tromsø 外围、Lofoten 海滩、Finnish Lapland 玻璃屋、Denali 周边。重点是前景和保暖。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="gear-library" class="single-page">
+      <div class="back-row">
+        <a class="back-link" href="#home">返回首页</a>
+      </div>
+      <div class="page-hero">
+        <div>
+          <p class="eyebrow">7 Gear Lists</p>
+          <h1>7 份装备清单，按真实场景拆开准备</h1>
+          <p class="lead">
+            北境旅行最容易出问题的不是少带一件衣服，而是装备没有按天气、活动和拍摄目标分组。下面 7 份清单可以直接复制成行李表。
+          </p>
+        </div>
+        <div class="page-hero-badge">
+          <strong>7</strong>
+          <span>Checklists</span>
+        </div>
+      </div>
+
+      <div class="section compact-section">
+        <div class="detail-grid">
+          <article class="detail-panel">
+            <span class="detail-kicker">Layering</span>
+            <strong>极寒穿衣层</strong>
+            <p>排汗内层、羊毛中层、羽绒保温层、防风防水外壳、护耳帽、脖套、两副手套。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Wet Weather</span>
+            <strong>雨雪和冰面防护</strong>
+            <p>防水裤、雪套、防滑鞋套、备用袜子、轻量毛巾、密封袋、镜头布。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Camera</span>
+            <strong>摄影电力包</strong>
+            <p>三脚架、快装板、备用电池、移动电源、头灯、遥控快门、干燥剂。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Road</span>
+            <strong>自驾安全包</strong>
+            <p>离线地图、车载充电器、雪刷、应急毯、热饮、能量棒、当天道路状态截图。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Hot Spring</span>
+            <strong>温泉小包</strong>
+            <p>泳衣、拖鞋、防水袋、保湿霜、干发帽、零钱或电子支付、回程保暖外套。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Hiking</span>
+            <strong>轻徒步补给</strong>
+            <p>保温水壶、坚果、手套备用件、简易冰爪、太阳镜、防晒、个人药品。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Offline</span>
+            <strong>文件与离线资料</strong>
+            <p>护照扫描件、保险单、住宿确认、租车条款、紧急电话、离线翻译、备用银行卡。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="season-guide" class="single-page">
+      <div class="back-row">
+        <a class="back-link" href="#home">返回首页</a>
+      </div>
+      <div class="page-hero">
+        <div>
+          <p class="eyebrow">4 Seasons</p>
+          <h1>4 季出行建议：用季节决定路线，而不是硬赶景点</h1>
+          <p class="lead">
+            北境旅行的核心差异来自光照、道路、活动开放情况和天气窗口。下面按季节整理适合的目标。
+          </p>
+        </div>
+        <div class="page-hero-badge">
+          <strong>4</strong>
+          <span>Seasons</span>
+        </div>
+      </div>
+
+      <div class="section compact-section">
+        <div class="detail-grid">
+          <article class="detail-panel">
+            <span class="detail-kicker">Spring</span>
+            <strong>春季：冰雪退场，瀑布水量增加</strong>
+            <p>适合冰岛南岸、黄金圈、部分峡湾城市线。注意融雪、泥泞、风和道路临时变化。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Summer</span>
+            <strong>夏季：日照最长，适合深度自驾</strong>
+            <p>适合 Lofoten、法罗群岛、西峡湾和格陵兰海湾。住宿要早订，热门徒步点停车紧张。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Autumn</span>
+            <strong>秋季：极光季开始，颜色更安静</strong>
+            <p>适合芬兰拉普兰、瑞典 Abisko、挪威北部和冰岛环线局部。白天仍可徒步，夜晚可拍极光。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Winter</span>
+            <strong>冬季：极光、雪地和蓝调时间</strong>
+            <p>适合固定基地式玩法：Fairbanks、Rovaniemi、Tromsø、Longyearbyen。减少长距离赶路，预留天气日。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="route-iceland" class="single-page">
+      <div class="back-row">
+        <a class="back-link" href="#content">返回路线内容</a>
+      </div>
+      <div class="page-hero">
+        <div>
+          <p class="eyebrow">Route Detail · Iceland</p>
+          <h1>瓦特纳冰原与蓝冰洞 5 日</h1>
+          <p class="lead">
+            参考 Visit Iceland 对南岸的介绍：这条线把瀑布、冰川、黑沙滩、Jökulsárlón 冰河湖和 Vatnajökull 周边徒步组合在一起。
+          </p>
+        </div>
+        <div class="page-hero-badge">
+          <strong>5</strong>
+          <span>Days</span>
+        </div>
+      </div>
+
+      <div class="section compact-section">
+        <div class="detail-grid">
+          <article class="detail-panel">
+            <span class="detail-kicker">Day 1-2</span>
+            <strong>雷克雅未克到 Vík</strong>
+            <p>上午出发，先看 Seljalandsfoss 和 Skógafoss，傍晚到 Vík。Reynisfjara 要远离浪线，风大时减少停留。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Day 3</span>
+            <strong>Skaftafell 与冰川边缘</strong>
+            <p>安排官方或持证向导带领的冰川徒步，把午后留给轻步道和冰川舌远景。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Day 4-5</span>
+            <strong>Jökulsárlón 与回程缓冲</strong>
+            <p>清晨拍冰河湖和钻石沙滩，最后一天分段回程，不把 5 小时以上车程压到夜里。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="route-lagoon" class="single-page">
+      <div class="back-row">
+        <a class="back-link" href="#content">返回路线内容</a>
+      </div>
+      <div class="page-hero">
+        <div>
+          <p class="eyebrow">Route Detail · Iceland</p>
+          <h1>火山温泉与海岸公路 4 日</h1>
+          <p class="lead">
+            参考 Visit Iceland 关于 Reykjanes 和 Volcanic Way 的素材，把地热、火山、灯塔、黑沙海岸和温泉做成轻量慢旅。
+          </p>
+        </div>
+        <div class="page-hero-badge">
+          <strong>4</strong>
+          <span>Days</span>
+        </div>
+      </div>
+
+      <div class="section compact-section">
+        <div class="detail-grid">
+          <article class="detail-panel">
+            <span class="detail-kicker">Base</span>
+            <strong>住在雷克雅未克或 Reykjanes</strong>
+            <p>减少换酒店，把火山海岸、地热区和温泉体验安排成当天往返。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Pace</span>
+            <strong>每天只安排 2 到 3 个重点</strong>
+            <p>上午海岸，下午温泉或咖啡馆，傍晚根据天气决定是否追极光。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Safety</span>
+            <strong>关注火山区域公告</strong>
+            <p>Reykjanes 近年火山活动频繁，出发前确认道路、空气质量和当地安全提示。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="route-lofoten" class="single-page">
+      <div class="back-row">
+        <a class="back-link" href="#content">返回路线内容</a>
+      </div>
+      <div class="page-hero">
+        <div>
+          <p class="eyebrow">Route Detail · Norway</p>
+          <h1>挪威 Lofoten 渔村、白沙滩与极光 7 日</h1>
+          <p class="lead">
+            参考 Norwegian Scenic Routes 官方资料：Lofoten 景观路线沿 E10 连接 Å 与 Raftsundet，并可绕行 Nusfjord、Unstad、Utakleiv、Henningsvær 等点。
+          </p>
+        </div>
+        <div class="page-hero-badge">
+          <strong>230</strong>
+          <span>km route</span>
+        </div>
+      </div>
+
+      <div class="section compact-section">
+        <div class="detail-grid">
+          <article class="detail-panel">
+            <span class="detail-kicker">West</span>
+            <strong>Å、Reine、Hamnøy</strong>
+            <p>最经典的渔村和山海前景，适合清晨和蓝调时刻。冬季路面结冰时减少夜间移动。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Beaches</span>
+            <strong>Haukland、Utakleiv、Ramberg</strong>
+            <p>白沙滩和锯齿山峰是 Lofoten 的核心画面。风大时先保证三脚架稳定和保暖。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Culture</span>
+            <strong>Nusfjord、Henningsvær 与海岸活动</strong>
+            <p>把渔村、咖啡馆、海鹰观赏或轻徒步穿插在公路中，避免每天只是停车拍照。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="route-lapland" class="single-page">
+      <div class="back-row">
+        <a class="back-link" href="#content">返回路线内容</a>
+      </div>
+      <div class="page-hero">
+        <div>
+          <p class="eyebrow">Route Detail · Finland</p>
+          <h1>芬兰拉普兰木屋与极光 6 日</h1>
+          <p class="lead">
+            参考 Visit Finland 对 Lapland 的官方介绍：这里以北极荒野、极光、雪、驯鹿、萨米文化和独特住宿为核心体验。
+          </p>
+        </div>
+        <div class="page-hero-badge">
+          <strong>6</strong>
+          <span>Days</span>
+        </div>
+      </div>
+
+      <div class="section compact-section">
+        <div class="detail-grid">
+          <article class="detail-panel">
+            <span class="detail-kicker">Day 1-2</span>
+            <strong>Rovaniemi 适应雪地节奏</strong>
+            <p>先安排市区补给、轻活动和森林木屋入住，不把抵达日排得过满。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Day 3-4</span>
+            <strong>雪鞋、驯鹿与玻璃屋</strong>
+            <p>白天参加雪地活动，夜晚留给极光观测。玻璃屋更适合作为体验夜，不必每晚都住。</p>
+          </article>
+          <article class="detail-panel">
+            <span class="detail-kicker">Day 5-6</span>
+            <strong>Inari 或 Levi/Ylläs 延伸</strong>
+            <p>想更安静去 Inari，想活动丰富去 Levi/Ylläs。最后一天留给天气和交通缓冲。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sources" class="single-page">
+      <div class="back-row">
+        <a class="back-link" href="#content">返回路线内容</a>
+      </div>
+      <div class="page-hero">
+        <div>
+          <p class="eyebrow">Reference Desk</p>
+          <h1>素材参考来源</h1>
+          <p class="lead">
+            页面里的路线名称、地区特点和注意事项参考了官方旅游网站及国家公园资料；文案已重新整理为本站自己的路线笔记。
+          </p>
+        </div>
+      </div>
+
+      <div class="section compact-section">
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>Visit Iceland · South Coast</strong>
+            <p>用于整理冰岛南岸、瀑布、黑沙滩、Vatnajökull 与 Jökulsárlón 等素材。</p>
+            <a class="source-link" href="https://www.visiticeland.com/article/the-south-coast/" target="_blank" rel="noreferrer">打开来源</a>
+          </article>
+          <article class="source-card">
+            <strong>Norwegian Scenic Routes · Lofoten</strong>
+            <p>用于整理 Lofoten 景观路线、E10、公路长度、渔村和海滩点位。</p>
+            <a class="source-link" href="https://www.nasjonaleturistveger.no/en/routes/lofoten/" target="_blank" rel="noreferrer">打开来源</a>
+          </article>
+          <article class="source-card">
+            <strong>Visit Finland · Lapland</strong>
+            <p>用于整理拉普兰极光、北极荒野、雪地活动、驯鹿和玻璃屋住宿。</p>
+            <a class="source-link" href="https://www.visitfinland.com/en/places-to-go/lapland/" target="_blank" rel="noreferrer">打开来源</a>
+          </article>
+          <article class="source-card">
+            <strong>Visit Greenland · Ilulissat</strong>
+            <p>用于整理 Ilulissat、冰峡湾和 Disko Bay 的慢旅行素材。</p>
+            <a class="source-link" href="https://visitgreenland.com/destinations/ilulissat/" target="_blank" rel="noreferrer">打开来源</a>
+          </article>
+          <article class="source-card">
+            <strong>Visit Faroe Islands</strong>
+            <p>用于整理法罗群岛村落、海崖、天气与岛屿旅行氛围。</p>
+            <a class="source-link" href="https://visitfaroeislands.com/en" target="_blank" rel="noreferrer">打开来源</a>
+          </article>
+          <article class="source-card">
+            <strong>Denali National Park</strong>
+            <p>用于整理 Denali 冬季路线和天气缓冲的思路。</p>
+            <a class="source-link" href="https://www.nps.gov/dena/planyourvisit/winter-activities.htm" target="_blank" rel="noreferrer">打开来源</a>
+          </article>
+          <article class="source-card">
+            <strong>Kiruna Lappland · Abisko</strong>
+            <p>用于整理 Kiruna、Abisko、北极圈以北和极光季节相关素材。</p>
+            <a class="source-link" href="https://kirunalapland.se/en/this-is-kiruna/" target="_blank" rel="noreferrer">打开来源</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 北境微光旅行手帐 · 路线、装备与风景笔记持续更新 · <a href="#sources">素材参考</a></p>
+  </footer>
+</body>
+</html>

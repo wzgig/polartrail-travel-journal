@@ -1,0 +1,13 @@
+# Local browser profiles and screenshots
+.edge-preview-profile/
+*.png
+!assets/**/*.png
+
+# OS/editor noise
+Thumbs.db
+.DS_Store
+.vscode/
+
+# Temporary files
+*.tmp
+*.bak
