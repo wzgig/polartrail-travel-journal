@@ -85,3 +85,23 @@
 - Pages 发布源：`main` 分支 `/docs` 目录。
 - 说明：`single.html` 已同步到 `docs/index.html`，线上页面使用 `docs/index.html`。
 - 线上验证：GitHub Pages 状态为 `built`，页面返回 HTTP 200，标题为“北境微光旅行手帐”。
+
+## 2026-06-07
+
+### 联系信息与团队姓名更新
+
+- 修改文件：
+  - `single.html`
+  - `about.html`
+  - `docs/index.html`
+  - `PROJECT_PROGRESS.md`
+- 修改内容：
+  - 团队姓名从“林澈、许南、周予”改为“萌萌、雨雨、鑫鑫”。
+  - 联系邮箱从 `hello@polartrail.example` 改为 `1669508007@qq.com`。
+  - 城市从“上海 · 远程协作”改为“秦皇岛 · 远程协作”。
+- 发布同步：
+  - 已将 `single.html` 同步覆盖到 `docs/index.html`。
+- 验证内容：
+  - 已检查旧姓名、旧邮箱、旧城市在 HTML 页面中清除。
+  - 已确认 `single.html` 与 `docs/index.html` 内容一致。
+  - 本条记录随本次变更一起提交并推送到 GitHub。
